@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Blog detail
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+              {{blog.created_at}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{blog.title}}</h5>
+              <p class="card-text">{{blog.content}}</p>
+              <a href="{% url 'blogs:blog-delete-confirmation' blog.id %}">delete</a>
+              {%if not request.user.is_superuser%}
+              <a href="{% url 'blogs:blog-update' blog.id %}">
+                edit
+              </a>
+              {% endif %}
+            </div>
+          </div>
+    </div>
+</div>
+
+{% endblock %}

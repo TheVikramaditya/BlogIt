@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Blogs
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  {% if blogs %}
+  {% for blogs in blogs %}
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+              {{blogs.created_at}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{blogs.title}}</h5>
+              <p class="card-text">{{blogs.content|truncatechars:20}}....</p>
+              <a href="{% url 'blogs:blog-detail' blogs.id %}">See More</a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="card">
+      <div class="card-header">
+        No Data Available , 
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Seems That You Haven't Post Anything Yet</h5>
+        <p class="card-text">click on the link below to make your first post</p>
+        <a href="{% url 'blogs:create-blog' %}" class="btn btn-primary">Create a Blog</a>
+      </div>
+      {% endif %}
+</div>
+
+
+{% endblock %}
